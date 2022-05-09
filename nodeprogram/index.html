@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | QuickmovStudio</title>
+  </head>
+  <body style="text-align: center">
+    <button onclick="onLoadScene()">加载</button>
+    <canvas id="unity-canvas" width=1280 height=720 style="width: 1280px; height: 720px; background: #231F20"></canvas>
+    <script src="Build/BuildForWebgl.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/BuildForWebgl.data.unityweb",
+        frameworkUrl: "Build/BuildForWebgl.framework.js.unityweb",
+        codeUrl: "Build/BuildForWebgl.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "avatarworks",
+        productName: "QuickmovStudio",
+        productVersion: "2022-05-07 14:35:48",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }).then(function onSucuss(mInstance){
+        myGameInstance = mInstance;
+      });
+
+
+
+      function onLoadScene () {
+        var AWSetMessage = "{\"event\":\"AWSetMessage\",\"params\":[]}";
+        myGameInstance.Module.SendMessageToUnity(AWSetMessage,(msg)=>{
+              console.log("CallBack方式读到的内容为==>>", msg);
+        });
+
+
+
+
+
+        // var isLoadingScene = false;
+        // var isLoadingAll = false;
+        // var accountInfoJson = "{\"event\":\"AWAccountInfo\",\"params\":[{\"account\":\"15260697365\",\"accessToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjI2NzIwLCJhY2NvdW50X3R5cGUiOiJ2aXAiLCJyZWxvZ2luX3RpbWUiOjE2NDU2MTk0NTQsIm1heF9jb25uIjowLCJleHAiOjE2NTE0NzA3ODgsImlhdCI6MTY0NjI4Njc4OCwiaXNzIjoiaGpfcnRjX3NlcnZpY2UifQ.hyQvJpqJ735COwbW2t2xkEZulhXnKYidSCJSNCsJ7A8\",\"version\":\"2.0\",\"platform\":\"all\",\"projectId\":\"1005k6\",\"mode\":\"videoEditor\"}]}";
+
+        // myGameInstance.Module.SendMessageToUnity(accountInfoJson,(msg)=>{
+        //   console.log("CallBack方式读到的内容为==>>", msg);
+        //   if(isLoadingScene) return;
+
+        //   var loadSceneJson = "{\"event\":\"AWLoadScene\",\"params\":[]}";
+        //   isLoadingScene = true;
+        //   myGameInstance.Module.SendMessageToUnity(loadSceneJson,(msg)=>{
+        //     console.log("CallBack方式读到的内容为==>>", msg);
+        //     if(isLoadingAll) return;
+
+        //     var loadAllJson = "{\"event\":\"AWLoadAll\",\"params\":[[{\"time\":4,\"data\":[{\"elementId\":\"elem393303\",\"elementType\":\"idol\",\"values\":{\"anchorName\":\"小镜-职业装\",\"name\":\"小镜-职业装\",\"userid\":92021,\"type\":\"official\",\"default_voice\":\"zh-CN-XiaoxiaoNeural\",\"idolType\":\"character\"},\"tracks\":[{\"trackId\":\"track393303\",\"elementType\":\"idol\",\"attributeName\":\"\",\"clips\":[{\"clipId\":\"clip393303\",\"triggerTime\":0,\"blockType\":\"idol\",\"trackIndex\":0,\"clipBeginTime\":0,\"clipEndTime\":4,\"enabled\":true,\"values\":{\"anchorName\":\"小镜-职业装\",\"name\":\"小镜-职业装\",\"userid\":92021,\"type\":\"official\",\"default_voice\":\"zh-CN-XiaoxiaoNeural\",\"idolType\":\"character\",\"id\":92021,\"gender\":1,\"nickname\":\"小镜-职业装\",\"cover\":\"http://img.metaworks.cn/png/496539f58115b975e44e4e407574ba49.png\",\"kind\":\"character\",\"ascription\":\"official\",\"layerIndex\":0,\"error\":false},\"elementId\":\"elem393303\",\"trackId\":\"track393303\",\"elementType\":\"idol\",\"indexes\":{\"element\":0,\"track\":0,\"clip\":0},\"loading\":true}]},{\"trackId\":\"track441074\",\"elementType\":\"animation\",\"attributeName\":\"set-idol-animation\",\"clips\":[{\"clipId\":\"clip441074\",\"triggerTime\":0,\"blockType\":\"animation\",\"trackIndex\":0,\"layerIndex\":0,\"clipBeginTime\":0,\"clipEndTime\":4,\"enabled\":true,\"values\":{\"rotation\":\"0 0 0\",\"position\":\"0 0 0\",\"name\":\"anim/BaseAnim/Stand_Idel\",\"title\":\"优雅站姿\",\"needEyeParam\":true,\"eyeX\":0,\"eyeY\":0,\"layerIndex\":0,\"error\":false},\"elementId\":\"elem393303\",\"trackId\":\"track441074\",\"elementType\":\"animation\",\"indexes\":{\"element\":0,\"track\":1,\"clip\":0},\"loading\":true}]}]}]}]]}";
+        //     isLoadingAll = true;
+
+        //     myGameInstance.Module.SendMessageToUnity(loadAllJson,(msg)=>{
+        //       console.log("CallBack方式读到的内容为==>>", msg);
+        //     });
+            
+        //   });
+        // });
+
+      }
+    </script>
+  </body>
+</html>
